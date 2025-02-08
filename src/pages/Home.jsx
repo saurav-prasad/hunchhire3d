@@ -16,6 +16,7 @@ function Home() {
   const isMobile = useDeviceType();
   const [currAction, setCurrAction] = useState("Armature|Jamming3");
   const [isRotating, setIsRotating] = useState(false);
+  const [ifVideoEnded, setIfVideoEnded] = useState(false);
 
   const adjustFoxForScreenSize = () => {
     let fov = null;
@@ -45,6 +46,10 @@ function Home() {
     return () => document.removeEventListener("click", playVideo);
   }, []);
 
+  const onVideoEnded = () => {
+    console.log("object");
+    setIfVideoEnded(true)
+  };
   return (
     <div style={{ height: height }} className="flex flex-col h-full">
       <div className="flex-1">
@@ -66,23 +71,24 @@ function Home() {
               penumbra={1}
               intensity={2}
             />
-            {/* <Loader /> */}
-            {currAction !== "happy" && currAction !== "running" && (
-              <Handshake
-                position={isMobile ? [0, -1.7, 0] : [0, -2.9, 0]}
-                rotation={[12.629, 0, 0]}
-                scale={isMobile ? [1, 1, 1] : [1.7, 1.7, 1.7]}
-                currAction={currAction}
-              />
-            )}
-            {currAction === "running" && (
+            {currAction !== "happy" &&
+              currAction !== "running" &&
+              ifVideoEnded && (
+                <Handshake
+                  position={isMobile ? [0, -1.7, 0] : [0, -2.9, 0]}
+                  rotation={[12.629, 0, 0]}
+                  scale={isMobile ? [1, 1, 1] : [1.7, 1.7, 1.7]}
+                  currAction={currAction}
+                />
+              )}
+            {currAction === "running" && ifVideoEnded && (
               <Running
                 position={isMobile ? [0, -1.7, 0] : [0, -2.8, 0]}
                 rotation={[0, 0, 0]}
                 scale={isMobile ? [0.12, 0.12, 0.12] : [0.21, 0.21, 0.21]}
               />
             )}
-            {currAction === "happy" && (
+            {currAction === "happy" && ifVideoEnded && (
               <Happy
                 position={isMobile ? [0, -2, 0] : [0, -3, 0]}
                 rotation={[0, 0, 0]}
@@ -92,13 +98,21 @@ function Home() {
               />
             )}
             <Sky />
-            {/* <Html></Html> */}
           </Suspense>
         </Canvas>
       </div>
-      {/* <video ref={videoRef} autoPlay width="320" height="240">
-        <source src={mp4} type="video/mp4" />
-      </video> */}
+      {!ifVideoEnded && (
+        <video
+          className={`absolute top-[15%] lg:left-[40%] md:left-[30%] sm:left-[15%] left-[10%]`}
+          ref={videoRef}
+          onEnded={onVideoEnded}
+          autoPlay
+          width={isMobile ? "320" : "420"}
+          height={isMobile ? "240" : "340"}
+        >
+          <source src={mp4} type="video/mp4" />
+        </video>
+      )}
       {/* options */}
       <div>
         <Options setCurrAction={setCurrAction} />
