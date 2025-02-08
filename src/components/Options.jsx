@@ -37,14 +37,8 @@ function Options({ setCurrAction }) {
       text: "Sit",
       action: "Armature|Sitting",
     },
-    // {
-    //   name: "wave",
-    //   img: WaveImg,
-    //   text: "Wave",
-    //   action: "Armature|Wave",
-    // },
     {
-      name: "shake",
+      name: "wave",
       img: WaveImg,
       text: "Wave",
       action: "Armature|Wave",
@@ -55,18 +49,18 @@ function Options({ setCurrAction }) {
       action: "Armature|Walk",
       text: "Walk",
     },
-    // {
-    //   name: "running",
-    //   img: Run2Img,
-    //   action: "running",
-    //   text: "Running",
-    // },
-    // {
-    //   name: "happy",
-    //   img: HappyImg,
-    //   action: "happy",
-    //   text: "Happy",
-    // },
+    {
+      name: "running",
+      img: Run2Img,
+      action: "running",
+      text: "Running",
+    },
+    {
+      name: "happy",
+      img: HappyImg,
+      action: "happy",
+      text: "Happy",
+    },
   ];
   const onActionClick = (data) => {
     setCurrAction(data.action);

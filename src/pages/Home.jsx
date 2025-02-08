@@ -75,14 +75,6 @@ function Home() {
                 currAction={currAction}
               />
             )}
-            {/* {currAction !== "happy" && currAction !== "running" && (
-              <Handshake
-                position={isMobile ? [0, -1.7, 0] : [0, -2.9, 0]}
-                rotation={[12.629, 0, 0]}
-                scale={isMobile ? [1, 1, 1] : [1.7, 1.7, 1.7]}
-                currAction={currAction}
-              />
-            )}
             {currAction === "running" && (
               <Running
                 position={isMobile ? [0, -1.7, 0] : [0, -2.8, 0]}
@@ -98,7 +90,7 @@ function Home() {
                 isRotating={isRotating}
                 setIsRotating={setIsRotating}
               />
-            )} */}
+            )}
             <Sky />
             {/* <Html></Html> */}
           </Suspense>
