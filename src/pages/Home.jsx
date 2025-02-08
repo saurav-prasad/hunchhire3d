@@ -15,7 +15,7 @@ function Home() {
   const { height, width } = useWindowDimensions();
   const isMobile = useDeviceType();
   const [currAction, setCurrAction] = useState("Armature|Jamming3");
-  const [isRotating, setIsRotating] = useState(false);
+  const [isRotating, setIsRotating] = useState(true);
   const [ifVideoEnded, setIfVideoEnded] = useState(false);
 
   const adjustFoxForScreenSize = () => {
