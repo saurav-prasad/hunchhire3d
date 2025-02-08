@@ -30,7 +30,7 @@ function Sky({ isRotating }) {
   };
 
   useFrame((_, delta) => {
-    skyRef.current.rotation.y -= 0.032 * delta;
+    skyRef.current.rotation.y -= 0.045 * delta;
     // if (isRotating) {
     //   if (rotationSpeed.current >= 0) {
     //     skyRef.current.rotation.y += 0.29 * delta;
