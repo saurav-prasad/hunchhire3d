@@ -74,30 +74,30 @@ function Home() {
             />
             {currAction === "sad" && (
               <Sad
-                position={isMobile ? [0, -1.7, 0] : [0, -2.9, 0]}
+                position={isMobile ? [0, -1, 0] : [0, -2.9, 0]}
                 rotation={[12.629, 0, 0]}
-                scale={isMobile ? [1, 1, 1] : [3, 3, 3]}
+                scale={isMobile ? [1.25, 1.25, 1.25] : [3, 3, 3]}
               />
             )}
             {currAction === "amaze" && (
               <Amaze
-                position={isMobile ? [0, -1.7, 0] : [0, -2.9, 0]}
+                position={isMobile ? [0, -1, 0] : [0, -2.9, 0]}
                 rotation={[12.629, 0, 0]}
-                scale={isMobile ? [1, 1, 1] : [3, 3, 3]}
+                scale={isMobile ? [1.25, 1.25, 1.25] : [3, 3, 3]}
               />
             )}
             {currAction === "happy" && (
               <Happy
-                position={isMobile ? [0, -1.7, 0] : [0, -2.9, 0]}
+                position={isMobile ? [0, -1, 0] : [0, -2.9, 0]}
                 rotation={[12.629, 0, 0]}
-                scale={isMobile ? [1, 1, 1] : [3, 3, 3]}
+                scale={isMobile ? [1.25, 1.25, 1.25] : [3, 3, 3]}
               />
             )}
             {currAction === "idle" && (
               <Idle
-                position={isMobile ? [0, -1.7, 0] : [0, -2.9, 0]}
+                position={isMobile ? [0, -1, 0] : [0, -2.9, 0]}
                 rotation={[12.629, 0, 0]}
-                scale={isMobile ? [1, 1, 1] : [3, 3, 3]}
+                scale={isMobile ? [1.25, 1.25, 1.25] : [3, 3, 3]}
               />
             )}
             {/* <TestModel
