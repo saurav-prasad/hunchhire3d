@@ -16,14 +16,15 @@ function Happy({ ...props }) {
   const { gl, viewport } = useThree();
 
   useEffect(() => {
-    if (actions["Walk"]) {
-      console.log(actions);
-      actions["Walk"].play();
+    console.log(actions);
+    const action = actions["KeyAction.006"];
+    if (actions["KeyAction.006"]) {
+      actions["KeyAction.006"].reset().play();
+      actions["KeyAction.006"].timeScale = 0.17; // Slows down to 50% speed
     }
-
     return () => {
-      if (actions["Walk"]) {
-        actions["Walk"].stop();
+      if (actions["KeyAction.006"]) {
+        actions["KeyAction.006"].stop();
       }
     };
   }, []);
@@ -114,31 +115,22 @@ function Happy({ ...props }) {
     };
   }, [gl, handlePointerDown, handlePointerMove, handlePointerUP]);
   return (
-    <a.group ref={groupRef} {...props} dispose={null}>
-      <group name="Sketchfab_Scene">
-        <group name="Sketchfab_model" rotation={[-Math.PI / 2, 0, 0]}>
-          <group
-            name="d99cf671b39a4422989b3a73b878e553fbx"
-            rotation={[Math.PI / 2, 0, 0]}
-          >
-            <group name="Object_2">
-              <group name="RootNode">
-                <group name="Object_4">
-                  <primitive object={nodes._rootJoint} />
-                  <skinnedMesh
-                    name="Object_6"
-                    geometry={nodes.Object_6.geometry}
-                    material={materials.lambert1}
-                    skeleton={nodes.Object_6.skeleton}
-                  />
-                  <group name="polySurface19" />
-                </group>
-              </group>
-            </group>
-          </group>
+    <group ref={groupRef} {...props} dispose={null}>
+      <group name="Scene">
+        <group name="world">
+          <mesh
+            name="tmp95h7wx6vply"
+            castShadow
+            receiveShadow
+            geometry={nodes.tmp95h7wx6vply.geometry}
+            material={materials.Material_0}
+            morphTargetDictionary={nodes.tmp95h7wx6vply.morphTargetDictionary}
+            morphTargetInfluences={nodes.tmp95h7wx6vply.morphTargetInfluences}
+            position={[0.033, 1.011, -0.253]}
+          />
         </group>
       </group>
-    </a.group>
+    </group>
   );
 }
 

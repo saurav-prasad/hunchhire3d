@@ -1,20 +1,21 @@
 import { Canvas } from "@react-three/fiber";
 import React, { Suspense, useEffect, useRef, useState } from "react";
 import Happy from "../models/Happy";
-import Running from "../models/Running";
-import Handshake from "../models/Handshake";
 import Options from "../components/Options";
 import useWindowDimensions from "../hooks/useWindowDimensions";
 import useDeviceType from "../hooks/useDeviceType";
 import Sky from "../models/Sky";
 import Loader from "../components/Loader";
-import { Html } from "@react-three/drei";
 import mp4 from "../assets/video/Untitled.mp4";
+import TestModel from "../models/TestModel";
+import Amaze from "../models/Amaze";
+import Sad from "../models/Sad";
+import Idle from "../models/Idle";
 
 function Home() {
   const { height, width } = useWindowDimensions();
   const isMobile = useDeviceType();
-  const [currAction, setCurrAction] = useState("Armature|Jamming3");
+  const [currAction, setCurrAction] = useState("idle");
   const [isRotating, setIsRotating] = useState(true);
   const [ifVideoEnded, setIfVideoEnded] = useState(false);
 
@@ -48,7 +49,7 @@ function Home() {
 
   const onVideoEnded = () => {
     console.log("object");
-    setIfVideoEnded(true)
+    setIfVideoEnded(true);
   };
   return (
     <div style={{ height: height }} className="flex flex-col h-full">
@@ -71,7 +72,40 @@ function Home() {
               penumbra={1}
               intensity={2}
             />
-            {currAction !== "happy" &&
+            {currAction === "sad" && (
+              <Sad
+                position={isMobile ? [0, -1.7, 0] : [0, -2.9, 0]}
+                rotation={[12.629, 0, 0]}
+                scale={isMobile ? [1, 1, 1] : [3, 3, 3]}
+              />
+            )}
+            {currAction === "amaze" && (
+              <Amaze
+                position={isMobile ? [0, -1.7, 0] : [0, -2.9, 0]}
+                rotation={[12.629, 0, 0]}
+                scale={isMobile ? [1, 1, 1] : [3, 3, 3]}
+              />
+            )}
+            {currAction === "happy" && (
+              <Happy
+                position={isMobile ? [0, -1.7, 0] : [0, -2.9, 0]}
+                rotation={[12.629, 0, 0]}
+                scale={isMobile ? [1, 1, 1] : [3, 3, 3]}
+              />
+            )}
+            {currAction === "idle" && (
+              <Idle
+                position={isMobile ? [0, -1.7, 0] : [0, -2.9, 0]}
+                rotation={[12.629, 0, 0]}
+                scale={isMobile ? [1, 1, 1] : [3, 3, 3]}
+              />
+            )}
+            {/* <TestModel
+              position={isMobile ? [0, -1.7, 0] : [0, -2.9, 0]}
+              rotation={[12.629, 0, 0]}
+              scale={isMobile ? [1, 1, 1] : [3, 3, 3]}
+            /> */}
+            {/* {currAction !== "happy" &&
               currAction !== "running" &&
               ifVideoEnded && (
                 <Handshake
@@ -96,12 +130,12 @@ function Home() {
                 isRotating={isRotating}
                 setIsRotating={setIsRotating}
               />
-            )}
+            )} */}
             <Sky />
           </Suspense>
         </Canvas>
       </div>
-      {!ifVideoEnded && (
+      {ifVideoEnded && (
         <video
           className={`absolute top-[15%] lg:left-[40%] md:left-[30%] sm:left-[15%] left-[10%]`}
           ref={videoRef}

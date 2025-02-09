@@ -6,6 +6,9 @@ import SitImg from "../assets/icons/sit.png";
 import WalkImg from "../assets/icons/walk.png";
 import HappyImg from "../assets/icons/happy.png";
 import Run2Img from "../assets/icons/run2.png";
+import SadImg from "../assets/icons/sad.png";
+import AmazeImg from "../assets/icons/amaze.png";
+import IdleImg from "../assets/icons/idle.png";
 
 function Options({ setCurrAction }) {
   const [visiblePopup, setVisiblePopup] = useState(null); // State to track visibility of the popup
@@ -19,6 +22,33 @@ function Options({ setCurrAction }) {
   };
 
   const actions = [
+    {
+      name: "idle",
+      img: IdleImg,
+      text: "Idle",
+      action: "idle",
+    },
+    {
+      name: "sad",
+      img: SadImg,
+      text: "Sad",
+      action: "sad",
+    },
+
+    {
+      name: "amaze",
+      img: AmazeImg,
+      text: "Amaze",
+      action: "amaze",
+    },
+    {
+      name: "happy",
+      img: HappyImg,
+      text: "Happy",
+      action: "happy",
+    },
+  ];
+  const actions1 = [
     {
       name: "run",
       img: RunImg,
