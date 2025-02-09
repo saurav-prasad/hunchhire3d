@@ -11,6 +11,7 @@ import TestModel from "../models/TestModel";
 import Amaze from "../models/Amaze";
 import Sad from "../models/Sad";
 import Idle from "../models/Idle";
+import { Html } from "@react-three/drei";
 
 function Home() {
   const { height, width } = useWindowDimensions();
@@ -64,14 +65,19 @@ function Home() {
         >
           <Suspense fallback={<Loader />}>
             <directionalLight position={[0, 0, 1]} intensity={2.5} />
-            <ambientLight intensity={1} />
-            <pointLight position={[5, 10, 0]} intensity={2} />
+            <ambientLight intensity={9} />
+            <pointLight position={[5, 10, 2]} intensity={2} />
             <spotLight
-              position={[10, 10, 10]}
+              position={[2, 5, 10]}
               angle={0.15}
               penumbra={1}
               intensity={2}
             />
+            {/* <TestModel
+              position={isMobile ? [0, -1, 0] : [0, 0, 0]}
+              rotation={[12.629, 0, 0]}
+              scale={isMobile ? [1.25, 1.25, 1.25] : [3, 3, 3]}
+            /> */}
             {currAction === "sad" && (
               <Sad
                 position={isMobile ? [0, -1, 0] : [0, -2.9, 0]}
@@ -100,6 +106,20 @@ function Home() {
                 scale={isMobile ? [1.25, 1.25, 1.25] : [3, 3, 3]}
               />
             )}
+            {/* {currAction === "speak" && (
+              <Html>
+                <video
+                  className={`absolute top-[15%] lg:left-[40%] md:left-[30%] sm:left-[15%] left-[10%]`}
+                  ref={videoRef}
+                  onEnded={onVideoEnded}
+                  autoPlay
+                  width={isMobile ? "320" : "420"}
+                  height={isMobile ? "240" : "340"}
+                >
+                  <source src={mp4} type="video/mp4" />
+                </video>
+              </Html>
+            )} */}
             {/* <TestModel
               position={isMobile ? [0, -1.7, 0] : [0, -2.9, 0]}
               rotation={[12.629, 0, 0]}
@@ -135,7 +155,7 @@ function Home() {
           </Suspense>
         </Canvas>
       </div>
-      {ifVideoEnded && (
+      {currAction === "speak" && (
         <video
           className={`absolute top-[15%] lg:left-[40%] md:left-[30%] sm:left-[15%] left-[10%]`}
           ref={videoRef}
