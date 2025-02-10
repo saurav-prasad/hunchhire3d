@@ -11,7 +11,7 @@ import AmazeImg from "../assets/icons/amaze.png";
 import IdleImg from "../assets/icons/idle.png";
 import SpeakImg from "../assets/icons/speak.png";
 
-function Options({ setCurrAction }) {
+function Options({ setCurrAction, setIsPlayingMusic }) {
   const [visiblePopup, setVisiblePopup] = useState(null); // State to track visibility of the popup
 
   const handleMouseEnter = (id) => {
@@ -29,11 +29,17 @@ function Options({ setCurrAction }) {
       text: "Idle",
       action: "idle",
     },
+    // {
+    //   name: "speak",
+    //   img: SpeakImg,
+    //   text: "Speak",
+    //   action: "speak",
+    // },
     {
-      name: "speak",
+      name: "hello",
       img: SpeakImg,
-      text: "Speak",
-      action: "speak",
+      text: "Hello",
+      action: "hello",
     },
     {
       name: "sad",
@@ -101,6 +107,9 @@ function Options({ setCurrAction }) {
   ];
   const onActionClick = (data) => {
     setCurrAction(data.action);
+    if (data.action === "hello") {
+      setIsPlayingMusic(true);
+    }
   };
 
   return (

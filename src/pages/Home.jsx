@@ -19,6 +19,7 @@ function Home() {
   const [currAction, setCurrAction] = useState("idle");
   const [isRotating, setIsRotating] = useState(true);
   const [ifVideoEnded, setIfVideoEnded] = useState(false);
+  const [isPlayingMusic, setIsPlayingMusic] = useState(true);
 
   const adjustFoxForScreenSize = () => {
     let fov = null;
@@ -73,11 +74,16 @@ function Home() {
               penumbra={1}
               intensity={2}
             />
-            {/* <TestModel
-              position={isMobile ? [0, -1, 0] : [0, 0, 0]}
-              rotation={[12.629, 0, 0]}
-              scale={isMobile ? [1.25, 1.25, 1.25] : [3, 3, 3]}
-            /> */}
+            {currAction === "hello" && (
+              <>
+                <TestModel
+                  isPlayingMusic={isPlayingMusic}
+                  position={isMobile ? [0, -1, 0] : [0, -2.5, 0]}
+                  rotation={[12.629, 0.1, 0]}
+                  scale={isMobile ? [1.25, 1.25, 1.25] : [2.5, 2.5, 2.5]}
+                />
+              </>
+            )}
             {currAction === "sad" && (
               <Sad
                 position={isMobile ? [0, -1, 0] : [0, -2.9, 0]}
@@ -167,9 +173,13 @@ function Home() {
           <source src={mp4} type="video/mp4" />
         </video>
       )}
+
       {/* options */}
       <div>
-        <Options setCurrAction={setCurrAction} />
+        <Options
+          setIsPlayingMusic={setIsPlayingMusic}
+          setCurrAction={setCurrAction}
+        />
       </div>
     </div>
   );
