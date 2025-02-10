@@ -1,18 +1,23 @@
 import React, { useEffect, useRef, useState } from "react";
-import untitled from "../assets/3d/untitled.glb";
+import idleScene from "../assets/3d/idle.glb";
 import { useAnimations, useGLTF } from "@react-three/drei";
 import { useFrame, useThree } from "@react-three/fiber";
 import useDeviceType from "../hooks/useDeviceType";
 
 function Idle({ ...props }) {
+  // refs
   const groupRef = useRef();
-  const { nodes, materials, animations } = useGLTF(untitled);
   const lastX = useRef(0);
-  const [isRotating, setIsRotating] = useState(false);
   const rotationSpeed = useRef(0);
-  const isMobile = useDeviceType();
+  // state
+  const [isRotating, setIsRotating] = useState(false);
+  // three
   const { gl, viewport } = useThree();
+  const { nodes, materials, animations } = useGLTF(idleScene);
+  // custom hooks
+  const isMobile = useDeviceType();
 
+  // logics for rotating the model
   let dampingFactor = 0.955;
   if (isMobile) {
     dampingFactor = 0.7;
@@ -98,6 +103,7 @@ function Idle({ ...props }) {
       canvas.removeEventListener("touchend", handleKeyUp);
     };
   }, [gl, handlePointerDown, handlePointerMove, handlePointerUP]);
+
   return (
     <group ref={groupRef} {...props} dispose={null}>
       <group name="Scene">

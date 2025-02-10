@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 
+// Custom hook to check device type - mobile/pc
 const useDeviceType = () => {
   const [isMobile, setIsMobile] = useState(false);
 

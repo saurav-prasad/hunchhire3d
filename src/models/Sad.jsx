@@ -1,19 +1,28 @@
 import React, { useEffect, useRef, useState } from "react";
-import untitled from "../assets/3d/sad.glb";
+import sadScene from "../assets/3d/sad.glb";
 import { useAnimations, useGLTF } from "@react-three/drei";
 import { useFrame, useThree } from "@react-three/fiber";
 import useDeviceType from "../hooks/useDeviceType";
 
 function Sad({ ...props }) {
+  // refs
   const groupRef = useRef();
-  const { nodes, materials, animations } = useGLTF(untitled);
+  const lastX = useRef(0);
+  const rotationSpeed = useRef(0);
+  // state
+  const [isRotating, setIsRotating] = useState(false);
+  // three
+  const { gl, viewport } = useThree();
+  const { nodes, materials, animations } = useGLTF(sadScene);
   const { actions } = useAnimations(animations, groupRef);
+  // custom hooks
+  const isMobile = useDeviceType();
+
+  // triggering animaitons
   useEffect(() => {
-    console.log(actions);
-    const action = actions["KeyAction.004"];
     if (actions["KeyAction.004"]) {
       actions["KeyAction.004"].reset().play();
-      actions["KeyAction.004"].timeScale = 0.17; // Slows down to 50% speed
+      actions["KeyAction.004"].timeScale = 0.17; // Slows down to 17% speed
     }
     return () => {
       if (actions["KeyAction.004"]) {
@@ -22,12 +31,7 @@ function Sad({ ...props }) {
     };
   }, []);
 
-  const lastX = useRef(0);
-  const [isRotating, setIsRotating] = useState(false);
-  const rotationSpeed = useRef(0);
-  const isMobile = useDeviceType();
-  const { gl, viewport } = useThree();
-
+  // logics for rotating the model
   let dampingFactor = 0.955;
   if (isMobile) {
     dampingFactor = 0.7;

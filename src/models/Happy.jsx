@@ -1,26 +1,29 @@
 import React, { useEffect, useRef, useState } from "react";
-import happyModel from "../assets/3d/happy.glb";
+import happyScene from "../assets/3d/happy.glb";
 import { useAnimations, useGLTF } from "@react-three/drei";
 import useDeviceType from "../hooks/useDeviceType";
 import { a } from "@react-spring/three";
 import { useFrame, useThree } from "@react-three/fiber";
 
 function Happy({ ...props }) {
+  // refs
   const groupRef = useRef();
-  const { nodes, materials, animations } = useGLTF(happyModel);
-  const { actions } = useAnimations(animations, groupRef);
   const lastX = useRef(0);
-  const [isRotating, setIsRotating] = useState(false);
   const rotationSpeed = useRef(0);
-  const isMobile = useDeviceType();
+  // state
+  const [isRotating, setIsRotating] = useState(false);
+  // three
   const { gl, viewport } = useThree();
+  const { nodes, materials, animations } = useGLTF(happyScene);
+  const { actions } = useAnimations(animations, groupRef);
+  // custom hooks
+  const isMobile = useDeviceType();
 
+  // triggering animaitons
   useEffect(() => {
-    console.log(actions);
-    const action = actions["KeyAction.006"];
     if (actions["KeyAction.006"]) {
       actions["KeyAction.006"].reset().play();
-      actions["KeyAction.006"].timeScale = 0.17; // Slows down to 50% speed
+      actions["KeyAction.006"].timeScale = 0.17; // Slows down to 17% speed
     }
     return () => {
       if (actions["KeyAction.006"]) {
@@ -29,6 +32,7 @@ function Happy({ ...props }) {
     };
   }, []);
 
+  // logics for rotating the model
   let dampingFactor = 0.955;
   if (isMobile) {
     dampingFactor = 0.7;
@@ -114,6 +118,7 @@ function Happy({ ...props }) {
       canvas.removeEventListener("touchend", handleKeyUp);
     };
   }, [gl, handlePointerDown, handlePointerMove, handlePointerUP]);
+  
   return (
     <group ref={groupRef} {...props} dispose={null}>
       <group name="Scene">

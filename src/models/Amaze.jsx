@@ -1,19 +1,28 @@
 import React, { useEffect, useRef, useState } from "react";
-import untitled from "../assets/3d/hello.glb";
+import amazeScene from "../assets/3d/amaze.glb";
 import { useAnimations, useGLTF } from "@react-three/drei";
 import { useFrame, useThree } from "@react-three/fiber";
 import useDeviceType from "../hooks/useDeviceType";
 
 function Amaze({ ...props }) {
+  // refs
   const groupRef = useRef();
-  const { nodes, materials, animations } = useGLTF(untitled);
+  const lastX = useRef(0);
+  const rotationSpeed = useRef(0);
+  // state
+  const [isRotating, setIsRotating] = useState(false);
+  // three
+  const { gl, viewport } = useThree();
+  const { nodes, materials, animations } = useGLTF(amazeScene);
   const { actions } = useAnimations(animations, groupRef);
+  // custom hooks
+  const isMobile = useDeviceType();
+
+  // triggering animaitons
   useEffect(() => {
-    console.log(actions);
-    const action = actions["KeyAction.003"];
     if (actions["KeyAction.003"]) {
       actions["KeyAction.003"].reset().play();
-      actions["KeyAction.003"].timeScale = 0.17; // Slows down to 50% speed
+      actions["KeyAction.003"].timeScale = 0.17; // Slows down to 17% speed
     }
     return () => {
       if (actions["KeyAction.003"]) {
@@ -22,16 +31,12 @@ function Amaze({ ...props }) {
     };
   }, []);
 
-  const lastX = useRef(0);
-  const [isRotating, setIsRotating] = useState(false);
-  const rotationSpeed = useRef(0);
-  const isMobile = useDeviceType();
-  const { gl, viewport } = useThree();
-
+  // logics for rotating the model
   let dampingFactor = 0.955;
   if (isMobile) {
     dampingFactor = 0.7;
   }
+
   const handlePointerDown = (e) => {
     e.stopPropagation();
     e.preventDefault();

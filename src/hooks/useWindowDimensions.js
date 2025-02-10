@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 
+// custom hook that retun height/width of device on rezizing the window
 const useWindowDimensions = () => {
     const [dimensions, setDimensions] = useState({
         width: window.innerWidth,
